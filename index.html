@@ -161,6 +161,7 @@
       border: none;
       border-radius: 10px;
       margin-top: 20px;
+      display: none;
     }
   </style>
 </head>
@@ -211,6 +212,13 @@
       slides[slideIndex-1].style.display = "block";
       dots[slideIndex-1].className += " active";
     }
+
+    function mostrarServicio(url) {
+      const iframe = document.getElementById("iframe-servicio");
+      iframe.src = url;
+      iframe.style.display = "block";
+      iframe.scrollIntoView({ behavior: "smooth" });
+    }
   </script>
 
   <!-- Noticias -->
@@ -256,19 +264,12 @@
     <h2>Servicios USM</h2>
     <div class="services-container">
       <button onclick="mostrarServicio('https://siga.usm.cl')">SIGA</button>
+      <button onclick="mostrarServicio('https://autoservicio.usm.cl/PROD/twbkwbis.P_GenMenu?name=homepage')">Portal de Autoservicio</button>
       <button onclick="mostrarServicio('https://www.usm.cl/directorio')">Directorio USM</button>
-      <button onclick="mostrarServicio('info-outlook.html')">Outlook</button>
-      <button onclick="mostrarServicio('info-tramites.html')">Portal de Trámites</button>
-      <button onclick="mostrarServicio('info-intranet.html')">Intranet USM</button>
+      <button onclick="mostrarServicio('https://mail.usm.cl')">Outlook</button>
     </div>
     <iframe id="iframe-servicio"></iframe>
   </section>
-
-  <script>
-    function mostrarServicio(url) {
-      document.getElementById("iframe-servicio").src = url;
-    }
-  </script>
 
 </body>
 </html>
