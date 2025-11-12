@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexo USM - Mapa</title>
+
+    <!-- MapLibre -->
+    <link
+      href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+
+    <style>
+      body {
+        font-family: Verdana, sans-serif;
+        margin: 0;
+        background-color: #eaf3ff;
+        text-align: center;
+      }
+      header {
+        background-color: #003366;
+        color: white;
+        padding: 10px 0;
+      }
+      h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+      .buttons {
+        margin: 15px 0;
+      }
+      input[type="button"] {
+        margin: 5px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #0066cc;
+        color: white;
+        cursor: pointer;
+      }
+      input[type="button"]:hover {
+        background-color: #004c99;
+      }
+      #map {
+        width: 90%;
+        height: 500px;
+        margin: 20px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Mapa - Nexo USM</h1>
+      <p><em>De sansanos para sansanos</em></p>
+    </header>
+
+    <div class="buttons">
+      <input
+        type="button"
+        value="Inicio"
+        onclick="location.href='index.html'"
+      />
+      <input
+        type="button"
+        value="Ficha Personal"
+        onclick="location.href='ficha_personal.html'"
+      />
+      <input
+        type="button"
+        value="Aula Virtual"
+        onclick="location.href='aula_virtual.html'"
+      />
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+      const map = new maplibregl.Map({
+        container: "map",
+        style: "https://tiles.openfreemap.org/styles/liberty",
+        center: [-71.5957, -33.035],
+        zoom: 15,
+      });
+
+      new maplibregl.Marker({ color: "blue" })
+        .setLngLat([-71.5957, -33.035])
+        .setPopup(new maplibregl.Popup().setText("UTFSM - Casa Central"))
+        .addTo(map);
+    </script>
+  </body>
+</html>

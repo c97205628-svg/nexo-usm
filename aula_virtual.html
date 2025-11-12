@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo USM - Aula Virtual</title>
+  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  <style>
+    body {
+      font-family: 'Verdana', sans-serif;
+      margin: 0;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #002b5c;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      background-color: #000080;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .courses {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .course {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      width: 260px;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .course-title {
+      background-color: #000080;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #002b5c;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    button {
+      background-color: #002b5c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #004a99;
+    }
+
+    /* Contenido dinámico del curso */
+    .course-content {
+      display: none;
+      text-align: left;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    .course-content h3 {
+      color: #002b5c;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nexo USM - Aula Virtual</h1>
+  </header>
+
+  <div class="container" id="mainContainer">
+    <h2>Mis Cursos del Semestre</h2>
+
+    <div class="courses" id="courseList">
+      <!-- Curso 1 -->
+      <div class="course">
+        <div class="course-title">MAT-071: Cálculo en una variable</div>
+        <p>Profesor: Dra. María Contreras</p>
+        <p><a onclick="showCourse('calculo')">Ir al aula</a></p>
+      </div>
+
+      <!-- Curso 2 -->
+      <div class="course">
+        <div class="course-title">FIS-111: Física General</div>
+        <p>Profesor: Dr. Juan Silva</p>
+        <p><a onclick="showCourse('fisica')">Ir al aula</a></p>
+      </div>
+
+      <!-- Curso 3 -->
+      <div class="course">
+        <div class="course-title">IWG400: Proyecto Inicial</div>
+        <p>Profesor: Ing. Carlos Ramírez</p>
+        <p><a onclick="showCourse('proyecto')">Ir al aula</a></p>
+      </div>
+    </div>
+
+    <!-- Contenido dinámico de los cursos -->
+    <div id="calculo" class="course-content">
+      <h3>MAT-071: Cálculo en una variable</h3>
+      <p><b>Profesor:</b> Dra. María Contreras</p>
+      <p><b>Descripción:</b> Introducción al cálculo diferencial e integral de una variable real. 
+      Aplicaciones en problemas de ingeniería y física.</p>
+      <p><b>Material de apoyo:</b></p>
+      <ul>
+        <li>Guía de ejercicios N°1</li>
+        <li>Apuntes de límites y derivadas</li>
+        <li>Video: Aplicaciones de la integral definida</li>
+      </ul>
+      <div class="button-container">
+        <button onclick="backToCourses()">Volver a mis cursos</button>
+      </div>
+    </div>
+
+    <div id="fisica" class="course-content">
+      <h3>FIS-111: Física General</h3>
+      <p><b>Profesor:</b> Dr. Juan Silva</p>
+      <p><b>Descripción:</b> Estudio de los principios fundamentales de la mecánica clásica, 
+      incluyendo cinemática, dinámica, trabajo y energía.</p>
+      <p><b>Material de apoyo:</b></p>
+      <ul>
+        <li>Guía de laboratorio N°2</li>
+        <li>Resumen de leyes de Newton</li>
+        <li>Simulación: Movimiento parabólico</li>
+      </ul>
+      <div class="button-container">
+        <button onclick="backToCourses()">Volver a mis cursos</button>
+      </div>
+    </div>
+
+    <div id="proyecto" class="course-content">
+      <h3>IWG400: Proyecto Inicial</h3>
+      <p><b>Profesor:</b> Ing. Carlos Ramírez</p>
+      <p><b>Descripción:</b> Desarrollo de un proyecto integrador aplicando conocimientos de 
+      ingeniería y trabajo en equipo.</p>
+      <p><b>Material de apoyo:</b></p>
+      <ul>
+        <li>Guía del proyecto</li>
+        <li>Ejemplo de informe técnico</li>
+        <li>Plantilla de presentación</li>
+      </ul>
+      <div class="button-container">
+        <button onclick="backToCourses()">Volver a mis cursos</button>
+      </div>
+    </div>
+
+    <!-- Botones generales -->
+    <div class="button-container" id="mainButtons">
+      <button onclick="location.href='index.html'">Volver al inicio</button>
+      <button onclick="location.href='mapa.html'">Ver mapa</button>
+      <button onclick="location.href='ficha_personal.html'">Ficha Personal</button>
+    </div>
+  </div>
+
+  <script>
+    function showCourse(id) {
+      document.getElementById("courseList").style.display = "none";
+      document.getElementById("mainButtons").style.display = "none";
+      document.getElementById(id).style.display = "block";
+    }
+
+    function backToCourses() {
+      document.querySelectorAll('.course-content').forEach(el => el.style.display = 'none');
+      document.getElementById("courseList").style.display = "flex";
+      document.getElementById("mainButtons").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
