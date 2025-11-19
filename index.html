@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -58,6 +58,7 @@
       background: rgba(0, 0, 0, 0.5);
       border-radius: 0 0 10px 10px;
     }
+
     .dot {
       cursor: pointer;
       height: 15px;
@@ -69,6 +70,7 @@
       transition: background-color 0.6s ease;
     }
     .active, .dot:hover { background-color: #717171; }
+
     .fade { animation-name: fade; animation-duration: 1.5s; }
     @keyframes fade { from { opacity: .4 } to { opacity: 1 } }
 
@@ -101,16 +103,16 @@
       text-align: left;
       color: white;
     }
-    .noticia h3 { font-size: 16px; }
-    .noticia p { font-size: 14px; }
-    .fecha { display: block; text-align: right; font-size: 12px; color: #ddd; margin-top: 8px; }
 
-    /* Botones */
-    .button-container, .services-container {
+    .fecha { text-align: right; font-size: 12px; color: #ddd; }
+
+    /* Botones principales */
+    .button-container {
       text-align: center;
       margin: 25px 0;
     }
-    button, .service-button {
+
+    button {
       background-color: #002b5c;
       color: white;
       border: none;
@@ -120,27 +122,17 @@
       font-size: 14px;
       margin: 5px;
       font-weight: bold;
-      transition: background-color 0.3s;
+      transition: 0.3s;
     }
-    button:hover, .service-button:hover { background-color: #004a99; }
+    button:hover { background-color: #004a99; }
 
-    /* Mapa */
-    .mapa {
+    /* Login / Registro */
+    .auth-buttons {
       text-align: center;
-      margin: 40px auto;
-      max-width: 800px;
+      margin-top: 20px;
     }
-    .mapa h2 {
-      background: #00008b;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-    }
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 10px;
+    .auth-buttons a {
+      text-decoration: none;
     }
 
     /* Servicios */
@@ -148,12 +140,6 @@
       max-width: 900px;
       margin: 50px auto;
       text-align: center;
-    }
-    .servicios h2 {
-      background: #00008b;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
     }
     #iframe-servicio {
       width: 100%;
@@ -165,111 +151,122 @@
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Nexo USM</h1>
-  </header>
+<header>
+  <h1>Nexo USM</h1>
+</header>
 
-  <!-- Slideshow -->
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="logo-usm.png" alt="Logo USM">
-      <div class="text">Universidad Técnica Federico Santa María</div>
-    </div>
-    <div class="mySlides fade">
-      <img src="casa-central.jpg" alt="Casa Central USM">
-      <div class="text">Campus Casa Central - Valparaíso</div>
-    </div>
-    <div class="mySlides fade">
-      <img src="electronica-usm.jpg" alt="Departamento de Electrónica">
-      <div class="text">Departamento de Electrónica</div>
-    </div>
-
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a>
+<!-- Slideshow -->
+<div class="slideshow-container">
+  <div class="mySlides fade">
+    <img src="logo-usm.png" alt="Logo USM">
+    <div class="text">Universidad Técnica Federico Santa María</div>
   </div>
 
-  <br>
-  <div style="text-align:center">
-    <span class="dot" onclick="currentSlide(1)"></span> 
-    <span class="dot" onclick="currentSlide(2)"></span> 
-    <span class="dot" onclick="currentSlide(3)"></span> 
+  <div class="mySlides fade">
+    <img src="casa-central.jpg" alt="Casa Central">
+    <div class="text">Campus Casa Central Valparaíso</div>
   </div>
 
-  <script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-    function plusSlides(n) { showSlides(slideIndex += n); }
-    function currentSlide(n) { showSlides(slideIndex = n); }
-    function showSlides(n) {
-      let i; let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) { slideIndex = 1; }
-      if (n < 1) { slideIndex = slides.length; }
-      for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-      for (i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active",""); }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-    }
-
-    function mostrarServicio(url) {
-      const iframe = document.getElementById("iframe-servicio");
-      iframe.src = url;
-      iframe.style.display = "block";
-      iframe.scrollIntoView({ behavior: "smooth" });
-    }
-  </script>
-
-  <!-- Noticias -->
-  <section class="noticias">
-    <h2>Noticias del Departamento</h2>
-    <div class="noticias-container">
-      <div class="noticia">
-        <h3>Estudiantes de Ing. Civil Telemática representan a Chile en final latinoamericana de competencia Huawei</h3>
-        <p>El equipo del Departamento de Electrónica de la USM participó recientemente ...</p>
-        <span class="fecha">📅 17 de junio de 2025</span>
-      </div>
-      <div class="noticia">
-        <h3>Ioannis Vourkas entre los mejores académicos del mundo en disciplina memristors</h3>
-        <p>El académico del departamento ha sido reconocido a nivel internacional ...</p>
-        <span class="fecha">📅 04 de junio de 2025</span>
-      </div>
-      <div class="noticia">
-        <h3>Académico Samir Kouro recibe el prestigioso Nagamori Award 2025</h3>
-        <p>El Dr. Samir Kouro del Departamento de Electrónica USM recibió uno de los premios más importantes …</p>
-        <span class="fecha">📅 02 de junio de 2025</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mapa -->
-  <section class="mapa">
-    <h2>Ubicación del Campus Casa Central</h2>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3327.139975239833!2d-71.6290915246307!3d-33.0368088808949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689de71627d7aa9%3A0x1a77c9c8f9e7dbf!2sUniversidad%20T%C3%A9cnica%20Federico%20Santa%20Mar%C3%ADa!5e0!3m2!1ses!2scl!4v1698452640497!5m2!1ses!2scl"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </section>
-
-  <!-- Botones principales -->
-  <div class="button-container">
-    <button onclick="location.href='ficha_personal.html'">Ficha Personal</button>
-    <button onclick="location.href='aula_virtual.html'">Aula Virtual</button>
+  <div class="mySlides fade">
+    <img src="electronica-usm.jpg" alt="Electrónica">
+    <div class="text">Departamento de Electrónica</div>
   </div>
 
-  <!-- Servicios USM -->
-  <section class="servicios">
-    <h2>Servicios USM</h2>
-    <div class="services-container">
-      <button onclick="mostrarServicio('https://siga.usm.cl')">SIGA</button>
-      <button onclick="mostrarServicio('https://autoservicio.usm.cl/PROD/twbkwbis.P_GenMenu?name=homepage')">Portal de Autoservicio</button>
-      <button onclick="mostrarServicio('https://www.usm.cl/directorio')">Directorio USM</button>
-      <button onclick="mostrarServicio('https://mail.usm.cl')">Outlook</button>
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+</div>
+
+<br>
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) { showSlides(slideIndex += n); }
+function currentSlide(n) { showSlides(slideIndex = n); }
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+
+  if (n > slides.length) slideIndex = 1;
+  if (n < 1) slideIndex = slides.length;
+
+  for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
+  for (i = 0; i < dots.length; i++)
+    dots[i].className = dots[i].className.replace(" active", "");
+
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
+<!-- Noticias -->
+<section class="noticias">
+  <h2>Noticias del Departamento</h2>
+
+  <div class="noticias-container">
+    <div class="noticia">
+      <h3>Estudiantes de Ing. Civil Telemática representan a Chile</h3>
+      <p>El equipo del Departamento de Electrónica participó recientemente…</p>
+      <span class="fecha">📅 17 junio 2025</span>
     </div>
-    <iframe id="iframe-servicio"></iframe>
-  </section>
+
+    <div class="noticia">
+      <h3>Ioannis Vourkas entre los mejores académicos del mundo</h3>
+      <p>Reconocido internacionalmente en el área de memristors…</p>
+      <span class="fecha">📅 04 junio 2025</span>
+    </div>
+
+    <div class="noticia">
+      <h3>Académico Samir Kouro recibe Nagamori Award</h3>
+      <p>Premio mundial en electrónica de potencia…</p>
+      <span class="fecha">📅 02 junio 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- Botones principales -->
+<div class="button-container">
+  <button onclick="location.href='ficha_personal.html'">Ficha Personal</button>
+  <button onclick="location.href='aula_virtual.html'">Aula Virtual</button>
+</div>
+
+<!-- Botones Login / Registro -->
+<div class="auth-buttons">
+  <a href="login.html"><button>Iniciar Sesión</button></a>
+  <a href="registro.html"><button>Registrarse</button></a>
+</div>
+
+<!-- Servicios -->
+<section class="servicios">
+  <h2>Servicios USM</h2>
+
+  <button onclick="mostrarServicio('https://siga.usm.cl')">SIGA</button>
+  <button onclick="mostrarServicio('https://autoservicio.usm.cl/PROD/twbkwbis.P_GenMenu?name=homepage')">Autoservicio</button>
+  <button onclick="mostrarServicio('https://www.usm.cl/directorio')">Directorio</button>
+  <button onclick="mostrarServicio('https://mail.usm.cl')">Outlook</button>
+
+  <iframe id="iframe-servicio"></iframe>
+</section>
+
+<script>
+function mostrarServicio(url) {
+  const iframe = document.getElementById("iframe-servicio");
+  iframe.src = url;
+  iframe.style.display = "block";
+  iframe.scrollIntoView({ behavior: "smooth" });
+}
+</script>
 
 </body>
 </html>
