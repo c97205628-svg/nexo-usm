@@ -63,7 +63,6 @@ export async function loginUser(email, password) {
 }
 
 
-
 // ------------------------------------------------------
 // 🚀 PROTEGER PÁGINAS
 // ------------------------------------------------------
@@ -73,7 +72,6 @@ export function protegerPagina() {
         window.location.href = "login.html";
     }
 }
-
 
 
 // ------------------------------------------------------
@@ -95,7 +93,6 @@ export function obtenerUID(callback) {
         callback(null);
     }
 }
-
 
 
 // ------------------------------------------------------

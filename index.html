@@ -1,320 +1,303 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexo USM</title>
-  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+      <html lang="es">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nexo USM</title>
+        <link href="/style.css" rel="stylesheet" type="text/css" media="all">
 
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: Verdana, sans-serif;
-      margin: 0;
-      background-color: #f4f6f8;
-      color: #333;
-    }
-    header {
-      background-color: #002b5c;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    h1 { margin: 0; }
+        <style>
+          * { box-sizing: border-box; }
+          body {
+            font-family: Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+            color: #333;
+          }
+          header {
+            background-color: #002b5c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+          }
+          h1 { margin: 0; }
 
-    /* ================================
-       BOTÓN CERRAR SESIÓN
-    ================================== */
-    .btn-logout {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 15px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
-      transition: 0.2s;
-      z-index: 999;
-    }
-    .btn-logout:hover {
-      background: #c0392b;
-    }
+          /* ================================
+            BOTÓN CERRAR SESIÓN
+          ================================== */
+          .btn-logout {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+            transition: 0.2s;
+            z-index: 999;
+          }
+          .btn-logout:hover {
+            background: #c0392b;
+          }
 
-    /* Slideshow */
-    .slideshow-container {
-      max-width: 1000px;
-      position: relative;
-      margin: auto;
-    }
-    .mySlides { display: none; }
-    img { vertical-align: middle; width: 100%; border-radius: 10px; }
+          /* Slideshow */
+          .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+          }
+          .mySlides { display: none; }
+          img { vertical-align: middle; width: 100%; border-radius: 10px; }
 
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -22px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-    }
-    .next { right: 0; border-radius: 3px 0 0 3px; }
-    .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+          .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+          }
+          .next { right: 0; border-radius: 3px 0 0 3px; }
+          .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
 
-    .text {
-      color: #f2f2f2;
-      font-size: 16px;
-      padding: 8px 12px;
-      position: absolute;
-      bottom: 8px;
-      width: 100%;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 0 0 10px 10px;
-    }
-    .dot {
-      cursor: pointer;
-      height: 15px;
-      width: 15px;
-      margin: 0 2px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-    .active, .dot:hover { background-color: #717171; }
-    .fade { animation-name: fade; animation-duration: 1.5s; }
-    @keyframes fade { from { opacity: .4 } to { opacity: 1 } }
+          .text {
+            color: #f2f2f2;
+            font-size: 16px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0 0 10px 10px;
+          }
 
-    /* Noticias */
-    .noticias {
-      margin: 40px auto;
-      max-width: 900px;
-      padding: 20px;
-      text-align: center;
-    }
-    .noticias h2 {
-      background: #00008b;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-    }
-    .noticias-container {
-      display: flex;
-      overflow-x: auto;
-      gap: 20px;
-      padding: 10px;
-      scroll-behavior: smooth;
-    }
-    .noticia {
-      flex: 0 0 280px;
-      background: #004a99;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      padding: 15px;
-      text-align: left;
-      color: white;
-    }
-    .noticia h3 { font-size: 16px; }
-    .noticia p { font-size: 14px; }
-    .fecha {
-      display: block;
-      text-align: right;
-      font-size: 12px;
-      color: #ddd;
-      margin-top: 8px;
-    }
+          .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+          }
+          .active, .dot:hover { background-color: #717171; }
 
-    /* Botones */
-    .button-container, .services-container {
-      text-align: center;
-      margin: 25px 0;
-    }
-    button, .service-button {
-      background-color: #002b5c;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      margin: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    button:hover, .service-button:hover { background-color: #004a99; }
+          .fade { animation-name: fade; animation-duration: 1.5s; }
+          @keyframes fade { from { opacity: .4 } to { opacity: 1 } }
 
-    /* Mapa */
-    .mapa {
-      text-align: center;
-      margin: 40px auto;
-      max-width: 800px;
-    }
-    .mapa h2 {
-      background: #00008b;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-    }
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 10px;
-    }
+          /* Noticias */
+          .noticias {
+            margin: 40px auto;
+            max-width: 900px;
+            padding: 20px;
+            text-align: center;
+          }
+          .noticias h2 {
+            background: #00008b;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+          }
+          .noticias-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px;
+            scroll-behavior: smooth;
+          }
+          .noticia {
+            flex: 0 0 280px;
+            background: #004a99;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            padding: 15px;
+            text-align: left;
+            color: white;
+          }
 
-    /* Servicios */
-    .servicios {
-      max-width: 900px;
-      margin: 50px auto;
-      text-align: center;
-    }
-    .servicios h2 {
-      background: #00008b;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-    }
-    #iframe-servicio {
-      width: 100%;
-      height: 500px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 20px;
-      display: none;
-    }
-  </style>
-</head>
-<body>
+          .noticia h3 { font-size: 16px; }
+          .noticia p { font-size: 14px; }
 
-  <!-- 🔴 BOTÓN CERRAR SESIÓN -->
-  <button class="btn-logout" id="btnLogout">Cerrar sesión</button>
+          .fecha {
+            display: block;
+            text-align: right;
+            font-size: 12px;
+            color: #ddd;
+            margin-top: 8px;
+          }
 
-  <header>
-    <h1>Nexo USM</h1>
-  </header>
+          /* Botones principales */
+          .button-container {
+            text-align: center;
+            margin: 25px 0;
+          }
 
-  <!-- Slideshow -->
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="logo-usm.png" alt="Logo USM">
-      <div class="text">Universidad Técnica Federico Santa María</div>
-    </div>
-    <div class="mySlides fade">
-      <img src="casa-central.jpg" alt="Casa Central USM">
-      <div class="text">Campus Casa Central - Valparaíso</div>
-    </div>
-    <div class="mySlides fade">
-      <img src="electronica-usm.jpg" alt="Departamento de Electrónica">
-      <div class="text">Departamento de Electrónica</div>
-    </div>
+          button {
+            background-color: #002b5c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+          }
+          button:hover { background-color: #004a99; }
 
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a>
-  </div>
+          /* Servicios */
+          .servicios {
+            max-width: 900px;
+            margin: 50px auto;
+            text-align: center;
+          }
+          #iframe-servicio {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+          }
+        </style>
+      </head>
 
-  <br>
-  <div style="text-align:center">
-    <span class="dot" onclick="currentSlide(1)"></span> 
-    <span class="dot" onclick="currentSlide(2)"></span> 
-    <span class="dot" onclick="currentSlide(3)"></span> 
-  </div>
+      <body>
 
-  <script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-    function plusSlides(n) { showSlides(slideIndex += n); }
-    function currentSlide(n) { showSlides(slideIndex = n); }
-    function showSlides(n) {
-      let i; let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) { slideIndex = 1; }
-      if (n < 1) { slideIndex = slides.length; }
-      for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-      for (i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active",""); }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-    }
+        <!-- 🔴 BOTÓN CERRAR SESIÓN -->
+        <button class="btn-logout" id="btnLogout">Cerrar sesión</button>
 
-    function mostrarServicio(url) {
-      const iframe = document.getElementById("iframe-servicio");
-      iframe.src = url;
-      iframe.style.display = "block";
-      iframe.scrollIntoView({ behavior: "smooth" });
-    }
-  </script>
+        <header>
+          <h1>Nexo USM</h1>
+        </header>
 
-  <!-- Noticias -->
-  <section class="noticias">
-    <h2>Noticias del Departamento</h2>
-    <div class="noticias-container">
-      <div class="noticia">
-        <h3>Estudiantes de Ing. Civil Telemática representan a Chile en final latinoamericana de competencia Huawei</h3>
-        <p>El equipo del Departamento de Electrónica de la USM participó recientemente ...</p>
-        <span class="fecha">📅 17 de junio de 2025</span>
+      <!-- Slideshow -->
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <img src="logo-usm.png" alt="Logo USM">
+          <div class="text">Universidad Técnica Federico Santa María</div>
+        </div>
+
+        <div class="mySlides fade">
+          <img src="casa-central.jpg" alt="Casa Central">
+          <div class="text">Campus Casa Central Valparaíso</div>
+        </div>
+
+        <div class="mySlides fade">
+          <img src="electronica-usm.jpg" alt="Electrónica">
+          <div class="text">Departamento de Electrónica</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
       </div>
-      <div class="noticia">
-        <h3>Ioannis Vourkas entre los mejores académicos del mundo en disciplina memristors</h3>
-        <p>El académico del departamento ha sido reconocido a nivel internacional ...</p>
-        <span class="fecha">📅 04 de junio de 2025</span>
+
+      <br>
+      <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
       </div>
-      <div class="noticia">
-        <h3>Académico Samir Kouro recibe el prestigioso Nagamori Award 2025</h3>
-        <p>El Dr. Samir Kouro del Departamento de Electrónica USM recibió uno de los premios más importantes …</p>
-        <span class="fecha">📅 02 de junio de 2025</span>
+
+      <script>
+      let slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) { showSlides(slideIndex += n); }
+      function currentSlide(n) { showSlides(slideIndex = n); }
+
+      function showSlides(n) {
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+
+        for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+        for (let i = 0; i < dots.length; i++)
+          dots[i].className = dots[i].className.replace(" active", "");
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
+      </script>
+
+      <!-- Noticias -->
+      <section class="noticias">
+        <h2>Noticias del Departamento</h2>
+
+        <div class="noticias-container">
+          <div class="noticia">
+            <h3>Estudiantes de Ing. Civil Telemática representan a Chile</h3>
+            <p>El equipo del Departamento de Electrónica participó recientemente…</p>
+            <span class="fecha">📅 17 junio 2025</span>
+          </div>
+
+          <div class="noticia">
+            <h3>Ioannis Vourkas entre los mejores académicos del mundo</h3>
+            <p>Reconocido internacionalmente en el área de memristors…</p>
+            <span class="fecha">📅 04 junio 2025</span>
+          </div>
+
+          <div class="noticia">
+            <h3>Académico Samir Kouro recibe Nagamori Award</h3>
+            <p>Premio mundial en electrónica de potencia…</p>
+            <span class="fecha">📅 02 junio 2025</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botones principales -->
+      <div class="button-container">
+        <button onclick="location.href='ficha_personal.html'">Ficha Personal</button>
+        <button onclick="location.href='aula_virtual.html'">Aula Virtual</button>
       </div>
-    </div>
-  </section>
-
-  <!-- Mapa -->
-  <section class="mapa">
-    <h2>Ubicación del Campus Casa Central</h2>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3327.139975239833!2d-71.6290915246307!3d-33.0368088808949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689de71627d7aa9%3A0x1a77c9c8f9e7dbf!2sUniversidad%20T%C3%A9cnica%20Federico%20Santa%20Mar%C3%ADa!5e0!3m2!1ses!2scl!4v1698452640497!5m2!1ses!2scl"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </section>
-
-  <!-- Botones principales -->
-  <div class="button-container">
-    <button onclick="location.href='ficha_personal.html'">Ficha Personal</button>
-    <button onclick="location.href='aula_virtual.html'">Aula Virtual</button>
-  </div>
-
-  <!-- Servicios USM -->
-  <section class="servicios">
-    <h2>Servicios USM</h2>
-    <div class="services-container">
-      <button onclick="mostrarServicio('https://siga.usm.cl')">SIGA</button>
-      <button onclick="mostrarServicio('https://autoservicio.usm.cl/PROD/twbkwbis.P_GenMenu?name=homepage')">Portal de Autoservicio</button>
-      <button onclick="mostrarServicio('https://www.usm.cl/directorio')">Directorio USM</button>
-      <button onclick="mostrarServicio('https://mail.usm.cl')">Outlook</button>
-    </div>
-    <iframe id="iframe-servicio"></iframe>
-  </section>
 
 
-  <!-- 🔥 SCRIPT PARA LOGOUT -->
-  <script type="module">
-    import { protegerPagina, cerrarSesion } from "./auth.js";
+      <!-- Servicios -->
+      <section class="servicios">
+        <h2>Servicios USM</h2>
 
-    protegerPagina();
+        <button onclick="mostrarServicio('https://siga.usm.cl')">SIGA</button>
+        <button onclick="mostrarServicio('https://autoservicio.usm.cl/PROD/twbkwbis.P_GenMenu?name=homepage')">Autoservicio</button>
+        <button onclick="mostrarServicio('https://www.usm.cl/directorio')">Directorio</button>
+        <button onclick="mostrarServicio('https://mail.usm.cl')">Outlook</button>
 
-    document.getElementById("btnLogout").addEventListener("click", () => {
-      cerrarSesion();
-    });
-  </script>
+        <iframe id="iframe-servicio"></iframe>
+      </section>
 
-</body>
-</html>
+      <script>
+      function mostrarServicio(url) {
+        const iframe = document.getElementById("iframe-servicio");
+        iframe.src = url;
+        iframe.style.display = "block";
+        iframe.scrollIntoView({ behavior: "smooth" });
+      }
+      </script>
+
+      <!-- 🔥 SCRIPT PARA PROTEGER Y CERRAR SESIÓN -->
+      <script type="module">
+        import { protegerPagina, cerrarSesion } from "./auth.js";
+
+        protegerPagina();
+
+        document.getElementById("btnLogout").addEventListener("click", () => {
+          cerrarSesion();
+        });
+      </script>
+
+      </body>
+      </html>
