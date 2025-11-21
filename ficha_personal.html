@@ -1,129 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ficha Personal - Nexo USM</title>
-  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
-  <style>
-    body {
-      font-family: 'Verdana', sans-serif;
-      margin: 0;
-      background-color: #f4f6f8;
-      color: #333;
-    }
-
-    header {
-      background-color: #002b5c;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: white;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: white;
-      background-color: #002b5c;
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .button-container {
-      text-align: center;
-      margin-top: 25px;
-    }
-
-    button {
-      background-color: #002b5c;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      margin: 0 5px;
-    }
-
-    button:hover {
-      background-color: #004a99;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Personal</title>
+    <link rel="stylesheet" href="ficha.css">
 </head>
+
 <body>
 
-  <header>
-    <h1>Nexo USM</h1>
-  </header>
+    <!-- Botón cerrar sesión (flotante) -->
+    <button class="btn-logout" id="btnLogout">Cerrar sesión</button>
 
-  <div class="container">
-    <h2>Ficha Personal del Estudiante</h2>
+    <div class="container">
+        <h1>Ficha Personal</h1>
 
-    <table>
-      <tr>
-        <th>Nombre completo</th>
-        <td>Agustín Villalobos</td>
-      </tr>
-      <tr>
-        <th>RUT</th>
-        <td>22.163.159-5</td>
-      </tr>
-      <tr>
-        <th>Rol</th>
-        <td>202521014-4</td>
-      </tr>
-      <tr>
-        <th>Carrera</th>
-        <td>Ingeniería Civil Electrónica</td>
-      </tr>
-      <tr>
-        <th>Campus</th>
-        <td>Casa Central - Valparaíso</td>
-      </tr>
-      <tr>
-        <th>Correo institucional</th>
-        <td>avillalobosc@usm.cl</td>
-      </tr>
-      <tr>
-        <th>Correo personal</th>
-        <td>agustinvillalobosc@gmail.com</td>
-      </tr>
-      <tr>
-        <th>Año de ingreso</th>
-        <td>2025</td>
-      </tr>
-    </table>
+        <!-- Imagen de perfil (opcional) -->
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+             class="profile-photo"
+             alt="Foto de perfil">
 
-    <div class="button-container">
-      <button onclick="location.href='index.html'">Volver al inicio</button>
-      <button onclick="location.href='mapa.html'">Ver mapa</button>
-      <button onclick="location.href='aula_virtual.html'">Aula Virtual</button>
+        <div class="section">
+            <div class="section-title">Nombre</div>
+            <div class="data-box" id="nombre"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">RUT</div>
+            <div class="data-box" id="rut"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Rol</div>
+            <div class="data-box" id="rol"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Correo</div>
+            <div class="data-box" id="correo"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Carrera</div>
+            <div class="data-box" id="carrera"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Campus</div>
+            <div class="data-box" id="campus"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Departamento</div>
+            <div class="data-box" id="departamento"></div>
+        </div>
+
+        <!-- Botón volver -->
+        <button class="btn-volver" onclick="window.location.href='index.html'">
+            Volver al Inicio
+        </button>
+
     </div>
-  </div>
+
+    <script type="module">
+        import { protegerPagina, obtenerUID, cerrarSesion } from "./auth.js";
+        import { db } from "./firebase.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+        protegerPagina();
+
+        document.getElementById("btnLogout").onclick = cerrarSesion;
+
+        obtenerUID(async (uid) => {
+            const ref = doc(db, "users", uid);
+            const snap = await getDoc(ref);
+
+            if (!snap.exists()) {
+                console.error("No existen datos en Firestore para este usuario.");
+                return;
+            }
+
+            const datos = snap.data();
+
+            document.getElementById("nombre").textContent = datos.Nombre || "";
+            document.getElementById("rut").textContent = datos.Rut || "";
+            document.getElementById("rol").textContent = datos.Rol || "";
+            document.getElementById("correo").textContent = datos.Correo || "";
+            document.getElementById("carrera").textContent = datos.Carrera || "";
+            document.getElementById("campus").textContent = datos.Campus || "";
+            document.getElementById("departamento").textContent = datos.Departamento || "";
+        });
+    </script>
 
 </body>
 </html>

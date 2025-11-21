@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoUSM - Login</title>
+
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Bienvenido a <span>NexoUSM</span></h2>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Correo institucional</label>
+                <input type="email" id="email" placeholder="example@usm.cl" required>
+            </div>
+
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" placeholder="********" required>
+            </div>
+
+            <button type="submit" class="btn-login">Ingresar</button>
+        </form>
+
+        <p class="footer">© 2025 NexoUSM — Proyecto académico</p>
+    </div>
+
+    <!-- Importar lógica de login -->
+    <script type="module">
+        import { loginUser } from "./auth.js";
+
+        document.getElementById("loginForm").addEventListener("submit", e => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            loginUser(email, password);
+        });
+    </script>
+
+</body>
+</html>
